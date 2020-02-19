@@ -1,8 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
-import  './DoubleColumn.module.scss';
-
 const DoubleColumn = (props) => {
   return (
     <div className="d-md-flex h-md-100 align-items-center">
@@ -16,10 +14,8 @@ const DoubleColumn = (props) => {
       <div className="col-md-6 p-0 bg-white h-md-100 loginarea">
         <div className="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
           Second half content here
-       </div>
+       </div> 
       </div>
-
-    <h1 className='teste'>Teste</h1>
     </div>
   );
 }
