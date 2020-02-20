@@ -2,9 +2,9 @@ import React from 'react';
 import Login from './';
 
 export default {
-  title: 'form/Login',
+  title: 'screen/Login',
   component: Login,
 };
 
-export const basic = () => <Login > </Login>;
+export const basic = () => <Login >  </Login>;
 

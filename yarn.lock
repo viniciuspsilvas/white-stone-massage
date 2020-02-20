@@ -904,7 +904,16 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bit/smart-solution-4u.ss4u-components.layout.double-column@^0.0.3":
+"@bit/smart-solution-4u.ss4u-components.form.login@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/smart-solution-4u.ss4u-components.form.login/-/smart-solution-4u.ss4u-components.form.login-0.0.1.tgz#1c13b5e1764b21ca4ddf08fbaf28b63a789a2d7d"
+  integrity sha1-HBO14XZLIcpN3wj7ryi2OniaLX0=
+  dependencies:
+    "@bit/smart-solution-4u.ss4u-components.layout.double-column" "0.0.3"
+    react "^16.12.0"
+    react-hook-form "^4.9.6"
+
+"@bit/smart-solution-4u.ss4u-components.layout.double-column@0.0.3", "@bit/smart-solution-4u.ss4u-components.layout.double-column@^0.0.3":
   version "0.0.3"
   resolved "https://node.bit.dev/smart-solution-4u.ss4u-components.layout.double-column/-/smart-solution-4u.ss4u-components.layout.double-column-0.0.3.tgz#0e75dad21a00e37d3c7149a267d029cdfffdc919"
   integrity sha1-DnXa0hoA4308cUmiZ9Apzf/9yRk=
