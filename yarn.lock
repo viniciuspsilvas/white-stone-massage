@@ -904,19 +904,40 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@bit/smart-solution-4u.ss4u-components.form.forgot-password@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/smart-solution-4u.ss4u-components.form.forgot-password/-/smart-solution-4u.ss4u-components.form.forgot-password-0.0.1.tgz#89a76cc40bb0aaf0e485e49b28503e83022887d2"
+  integrity sha1-iadsxAuwqvDkheSbKFA+gwIoh9I=
+  dependencies:
+    "@material-ui/core" "^4.9.3"
+    "@storybook/addon-actions" "^5.3.13"
+    react "^16.12.0"
+    react-hook-form "^4.9.7"
+
 "@bit/smart-solution-4u.ss4u-components.form.login@^0.0.1":
   version "0.0.1"
-  resolved "https://node.bit.dev/smart-solution-4u.ss4u-components.form.login/-/smart-solution-4u.ss4u-components.form.login-0.0.1.tgz#1c13b5e1764b21ca4ddf08fbaf28b63a789a2d7d"
-  integrity sha1-HBO14XZLIcpN3wj7ryi2OniaLX0=
+  resolved "https://node.bit.dev/smart-solution-4u.ss4u-components.form.login/-/smart-solution-4u.ss4u-components.form.login-0.0.1.tgz#a720f9f52bb06f3b95245169c741e4f2760898ea"
+  integrity sha1-pyD59SuwbzuVJFFpx0Hk8nYImOo=
   dependencies:
-    "@bit/smart-solution-4u.ss4u-components.layout.double-column" "0.0.3"
+    "@material-ui/core" "^4.9.3"
+    "@storybook/addon-actions" "^5.3.13"
     react "^16.12.0"
-    react-hook-form "^4.9.6"
+    react-hook-form "^4.9.7"
 
-"@bit/smart-solution-4u.ss4u-components.layout.double-column@0.0.3", "@bit/smart-solution-4u.ss4u-components.layout.double-column@^0.0.3":
-  version "0.0.3"
-  resolved "https://node.bit.dev/smart-solution-4u.ss4u-components.layout.double-column/-/smart-solution-4u.ss4u-components.layout.double-column-0.0.3.tgz#0e75dad21a00e37d3c7149a267d029cdfffdc919"
-  integrity sha1-DnXa0hoA4308cUmiZ9Apzf/9yRk=
+"@bit/smart-solution-4u.ss4u-components.form.signup@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/smart-solution-4u.ss4u-components.form.signup/-/smart-solution-4u.ss4u-components.form.signup-0.0.1.tgz#b93e22655b6d2bc4c249313ac438933724d7e8f3"
+  integrity sha1-uT4iZVttK8TCSTE6xDiTNyTX6PM=
+  dependencies:
+    "@material-ui/core" "^4.9.3"
+    "@storybook/addon-actions" "^5.3.13"
+    react "^16.12.0"
+    react-hook-form "^4.9.7"
+
+"@bit/smart-solution-4u.ss4u-components.layout.double-column@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/smart-solution-4u.ss4u-components.layout.double-column/-/smart-solution-4u.ss4u-components.layout.double-column-0.0.1.tgz#4f8ab706493b2f906200359c90f59959e45403d2"
+  integrity sha1-T4q3Bkk7L5BiADWckPWZWeRUA9I=
   dependencies:
     "@material-ui/core" "^4.9.3"
     bootstrap "^4.4.1"
@@ -10701,6 +10722,11 @@ react-hook-form@^4.9.6:
   version "4.9.6"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-4.9.6.tgz#2057b4af7028f09d50c9bd1db46d1ff4e453c046"
   integrity sha512-t5EQdfATwOOlj0rsBmHYBgf6s5L/dzakPzhzr2kdqTVhRnxSI73ZthJofZ+dYiXrXa6ds0VRso49GCHwDXL66Q==
+
+react-hook-form@^4.9.7:
+  version "4.9.8"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-4.9.8.tgz#eb3630d76d90b19fe2fd40383a5b6975dce668a6"
+  integrity sha512-oOeTZe4MomOyoPzJ5k69kg2xukdDE02jkoH6kSH9anUq5GjD2gL6TGQGhjA2deV4JYjM7c1XD4Mwinxoqc407w==
 
 react-hotkeys@2.0.0:
   version "2.0.0"

@@ -1,16 +1,16 @@
 import React from 'react';
-import Login from '@bit/smart-solution-4u.ss4u-components.form.login';
+import Signup from '@bit/smart-solution-4u.ss4u-components.form.signup';
 import DoubleColumn from '@bit/smart-solution-4u.ss4u-components.layout.double-column';
 
 const { REACT_APP_NAME } = process.env;
 
-const LoginScreen = () => {
+const SignupScreen = () => {
 
     return (
         <DoubleColumn>
-            <Login title={REACT_APP_NAME}></Login>
+            <Signup title={REACT_APP_NAME}></Signup>
         </DoubleColumn>
     );
 }
 
-export default LoginScreen;
+export default SignupScreen;
