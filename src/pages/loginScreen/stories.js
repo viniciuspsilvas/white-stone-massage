@@ -1,10 +1,9 @@
 import React from 'react';
-import Login from './';
+import LoginScreen from './';
 
 export default {
-  title: 'screen/Login',
-  component: Login,
+  title: 'screen/LoginScreen',
+  component: LoginScreen,
 };
 
-export const basic = () => <Login >  </Login>;
-
+export const basic = () => <LoginScreen >  </LoginScreen>;
