@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
+    "heroku-prebuild": "npm install --only=dev",
     "heroku-postbuild": "echo This runs afterwards."
   },
   "eslintConfig": {
