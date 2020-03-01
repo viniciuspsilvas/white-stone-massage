@@ -4,10 +4,9 @@ import { AppProvider } from './AppContext'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ForgotPassword from './pages/ForgotPassword'
+import Dashboard from './pages/Dashboard'
 
 export const Routes = () => {
-  
-  console.log('a')
   
   return (
   <AppProvider>
@@ -17,6 +16,7 @@ export const Routes = () => {
         <Route exact path='/login' component={ Login } />
         <Route exact path='/signup' component={ Signup } />
         <Route exact path='/forgotpassword' component={ ForgotPassword } />
+        <Route exact path='/dashboard' component={ Dashboard } />
       </Switch>
     </BrowserRouter>
   </AppProvider>

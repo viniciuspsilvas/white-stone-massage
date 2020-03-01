@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { ThemeProvider } from '@material-ui/core';
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-import Theme from './config/Theme';
+import { ThemeProvider } from '@material-ui/core'
+import Theme from './config/Theme'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const AppContext = React.createContext()
 
@@ -24,7 +24,7 @@ export const AppProvider = ( props ) => {
   return (
     <ThemeProvider theme={ Theme }>
       <AppContext.Provider value={{ state, actions }}> 
-        {/* <ToastContainer
+        <ToastContainer
           position="top-center"
           autoClose={ 5000 }
           hideProgressBar={ false }
@@ -35,7 +35,7 @@ export const AppProvider = ( props ) => {
           pauseOnVisibilityChange
           draggable
           pauseOnHover
-        /> */}
+        />
         { props.children } 
       </AppContext.Provider>
     </ThemeProvider>
