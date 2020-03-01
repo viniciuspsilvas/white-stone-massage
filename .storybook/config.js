@@ -2,7 +2,7 @@ import { configure, addDecorator } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import {muiTheme} from 'storybook-addon-material-ui';
 import { withConsole } from '@storybook/addon-console';
-import theme from '../src/theme/'
+import theme from '../src/config/Theme'
 
 addDecorator(StoryRouter());
 
