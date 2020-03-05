@@ -943,6 +943,16 @@
     bootstrap "^4.4.1"
     react "^16.12.0"
 
+"@bit/smart-solution-4u.ss4u-components.surfaces.card-person@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/smart-solution-4u.ss4u-components.surfaces.card-person/-/smart-solution-4u.ss4u-components.surfaces.card-person-0.0.1.tgz#9d8e18ffcc0e7821b76f1b094d13895af7affbb3"
+  integrity sha1-nY4Y/8wOeCG3bxsJTROJWvev+7M=
+  dependencies:
+    "@material-ui/core" "^4.9.3"
+    "@material-ui/icons" "^4.9.1"
+    "@storybook/addon-actions" "^5.3.13"
+    react "^16.12.0"
+
 "@chromaui/localtunnel@1.10.1":
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/@chromaui/localtunnel/-/localtunnel-1.10.1.tgz#34da7dab7055a16b1b9034a9eb7e3054ebec4b98"
@@ -1281,6 +1291,13 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
     react-transition-group "^4.3.0"
+
+"@material-ui/icons@^4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.9.1.tgz#fdeadf8cb3d89208945b33dbc50c7c616d0bd665"
+  integrity sha512-GBitL3oBWO0hzBhvA9KxqcowRUsA0qzwKkURyC8nppnC3fw54KPKZ+d4V1Eeg/UnDRSzDaI9nGCdel/eh9AQMg==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
 
 "@material-ui/styles@^4.9.0":
   version "4.9.0"
@@ -2830,6 +2847,13 @@ axios@0.19.0:
   dependencies:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
+
+axios@^0.19.2:
+  version "0.19.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+  integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+  dependencies:
+    follow-redirects "1.5.10"
 
 axobject-query@^2.0.2:
   version "2.1.1"
