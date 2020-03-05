@@ -1,6 +1,8 @@
 {
   "companyName": "WHITE STONE",
-  "logoPath": "assets/img/logo.png",
-  "secondLogoPath": "assets/img/logo_no_text.png",
+  "logoPath": "/assets/img/logo.png",
+  "logoMenuPath": "/assets/img/logo_menu.png",
+  "logoBlackTextPath": "/assets/img/logo_black_text.png",
+  "logoNoText": "/assets/img/logo_no_text.png",
   "errorMessagesFile": "errorConfig.json"
 }

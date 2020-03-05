@@ -21,6 +21,17 @@ export const AppProvider = ( props ) => {
     }))
   }), [ setState ])
 
+  React.useEffect(() => {
+
+    actions.setUser({
+      name: 'Patricia Ott',
+      email: 'patricia@gmail.com'
+    })
+
+      // get user by token => window.localStorage.token
+      // set user => actions.setUser()
+  }, [ actions ])
+
   return (
     <ThemeProvider theme={ Theme }>
       <AppContext.Provider value={{ state, actions }}> 
