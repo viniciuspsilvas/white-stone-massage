@@ -24,3 +24,9 @@ export const truncateString = (value, quantity) => {
 export const boolCell = (value) => {
   return value ? 'Yes' : 'No'
 }
+
+export const setFormValue = ( obj, setValue ) => {
+  Object.keys(obj).forEach( key => {
+    setValue(key, obj[key])
+  })
+}

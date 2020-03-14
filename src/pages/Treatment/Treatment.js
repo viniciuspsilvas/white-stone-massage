@@ -56,7 +56,7 @@ const Treatment = props => {
   }, [ props.history, props.location.pathname, treatmentList ])
 
   const options = {
-    filterType: 'multiselect',
+    filterType: 'textField',
     responsive: 'scrollFullHeight',
     selectableRows: 'none',
     onRowClick: handleEdit

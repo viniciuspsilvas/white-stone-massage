@@ -12,6 +12,8 @@ import Staff from './pages/Staff'
 import Appointment from './pages/Appointment'
 import EditTreatment from './pages/Treatment/Edit'
 import NewTreatment from './pages/Treatment/New'
+import EditStaff from './pages/Staff/Edit/EditStaff'
+import NewStaff from './pages/Staff/New/NewStaff'
 
 export const Routes = () => {
   
@@ -26,6 +28,8 @@ export const Routes = () => {
           <PrivateRoute exact path='/dashboard' component={ Dashboard } />
           <PrivateRoute exact path='/customers' component={ Customer } />
           <PrivateRoute exact path='/staff' component={ Staff } />
+          <PrivateRoute exact path='/staff/edit/:id' component={ EditStaff } />
+          <PrivateRoute exact path='/staff/new' component={ NewStaff } />
           <PrivateRoute exact path='/treatments' component={ Treatment } />
           <PrivateRoute exact path='/treatments/edit/:id' component={ EditTreatment } />
           <PrivateRoute exact path='/treatments/new' component={ NewTreatment } />

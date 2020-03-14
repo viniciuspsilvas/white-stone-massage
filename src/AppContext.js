@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { ThemeProvider } from '@material-ui/core'
 import Theme from './config/Theme'
+import { ApolloProvider } from '@apollo/react-hooks';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import client from './api'
+import Loading from './components/Loading'
 
 const AppContext = React.createContext()
 
@@ -18,36 +21,34 @@ export const AppProvider = ( props ) => {
     setUser: user => setState(st => ({
       ...st,
       user
-    }))
+    })),
+    setLocalStorage: ( name, data ) => {
+      localStorage.setItem( name, data )
+    },
+    getLocalStorage: name => {
+      return localStorage.getItem( name )
+    },
   }), [ setState ])
-
-  React.useEffect(() => {
-
-    actions.setUser({
-      name: 'Patricia Ott',
-      email: 'patricia@gmail.com'
-    })
-
-      // get user by token => window.localStorage.token
-      // set user => actions.setUser()
-  }, [ actions ])
 
   return (
     <ThemeProvider theme={ Theme }>
       <AppContext.Provider value={{ state, actions }}> 
-        <ToastContainer
-          position="top-center"
-          autoClose={ 5000 }
-          hideProgressBar={ false }
-          newestOnTop={ false }
-          bodyClassName='custom-toast'
-          closeOnClick
-          rtl={ false }
-          pauseOnVisibilityChange
-          draggable
-          pauseOnHover
-        />
-        { props.children } 
+        <ApolloProvider client={ client }>
+          <Loading useLoader={ state.useLoader } />
+          <ToastContainer
+            position="top-center"
+            autoClose={ 6000 }
+            hideProgressBar={ false }
+            newestOnTop={ false }
+            bodyClassName='custom-toast'
+            closeOnClick
+            rtl={ false }
+            pauseOnVisibilityChange
+            draggable
+            pauseOnHover
+          />
+          { props.children } 
+        </ApolloProvider>
       </AppContext.Provider>
     </ThemeProvider>
   )
