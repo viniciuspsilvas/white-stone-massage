@@ -1,20 +1,22 @@
 import React from "react";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import AppLayout from "../Layouts/appLayout";
 import AppContext from "../../AppContext";
 import { GET_USER_BY_TOKEN } from "../../api/user";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyFetcher } from "../../utils/useFetcher";
 
 const PrivateRoute = ({ component: Component, path, ...rest }) => {
 
   const { actions, state } = React.useContext( AppContext )
 
   // TODO - loading
-  const [ getUser, { userLoading }] = useLazyQuery(GET_USER_BY_TOKEN, {
-    onCompleted: (res) => {
-      let type = res.userByToken.staff.firstname ? 'staff' : 'customer'
-      res.userByToken.profile = res.userByToken[type]
-      actions.setUser(res.userByToken)
+  const [ getUser, { loading } ] = useLazyFetcher(GET_USER_BY_TOKEN, {
+    onComplete: (res) => {
+      if (!res) return rest.history.push('/login')
+
+      let type = res.staff.firstname ? 'staff' : 'customer'
+      res.profile = res[type]
+      actions.setUser(res)
     },
     onError: (err) => {
       rest.history.push('/login')
@@ -22,10 +24,10 @@ const PrivateRoute = ({ component: Component, path, ...rest }) => {
   })
 
   React.useEffect(() => {
-    if (!state.user.id) {
+    if (!state.user.id && !loading) {
       getUser()
     }
-  }, [ state.user, getUser ])  
+  }, [ state.user, loading, getUser ])  
 
   return (
     <Route {...rest} render={ props => (

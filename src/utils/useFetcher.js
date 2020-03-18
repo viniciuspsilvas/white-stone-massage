@@ -27,7 +27,6 @@ export const useFetcher = (query: DocumentNode, { filter, onComplete, onError })
           state.onComplete && state.onComplete(result)
         })
         .catch(err => {
-          console.log(err)
           state.onError && state.onError(err)
         })
         .finally(() => {
@@ -46,33 +45,37 @@ export const useFetcher = (query: DocumentNode, { filter, onComplete, onError })
 /**
  * 
  * @param { DocumentNode } query - Receives the query thats gonna be executed
- * @param { Object } filter - Receives the variables thats gonna be send to the server
  * @param { Function } onComplete - Receives a method that is executed to manage the data
  * @param { Function } onError - Receives a method that is executed in case of error
  */
-export const useLazyFetcher = (query: DocumentNode, { filter, onComplete, onError }) => {
+export const useLazyFetcher = (query: DocumentNode, { onComplete, onError } = () => {} ) => {
 
   const { actions } = useContext( AppContext )
-  const [ state ] = useState({ ...filter }, onComplete, onError )
+  const [ state ] = useState({ onComplete, onError })
   const [ data, setData ] = useState([])
+  const [ loading, setLoading ] = useState(false)
 
-  const fetchData = () => {
+  const fetchData = (filter) => {
+    const operation = query.definitions[0].operation === 'query' ? 'query' : 'mutate'
+    
     actions.setUseLoader( true )
-    client.query({query: query, variables: state.filter })
+    setLoading( true )
+    client[operation]({ [query.definitions[0].operation] : query, variables: filter })
       .then(res => {
-        Object.keys(res.data).filter(key => setData(res.data[key]))
-        state.onComplete && state.onComplete(res)
+        const result = Object.keys(res.data).map(key => res.data[key])[0]
+        setData(result)
+        state.onComplete && state.onComplete(result)
       })
       .catch(err => {
-        console.log(err)
         state.onError && state.onError(err)
       })
       .finally(() => {
         actions.setUseLoader( false )
+        setLoading( false )
       })
   }
 
-  return [ fetchData, { data } ];
+  return [ fetchData, { data, loading } ];
 }
 
 // export const useLazyFetcher = (query, filter) => {

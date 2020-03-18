@@ -18,6 +18,9 @@ const TABLE_COLUMNS = [
     label: 'Email',
     name: 'email'
   }, {
+    label: 'Username',
+    name: 'user.username'
+  }, {
     label: 'ABN',
     name: 'abn'
   }, {

@@ -12,6 +12,18 @@ export const GET_USER = gql`
   }
 `;
 
+export const GET_USER_BY_FILTER = gql`
+  query userByFilter($filter: UserInput!) {
+    userByFilter(filter: $filter) {
+      id
+      username
+      active
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const GET_USER_BY_TOKEN = gql`
   query userByToken {
     userByToken {
