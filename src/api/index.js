@@ -1,8 +1,9 @@
-import { ApolloClient, ApolloLink, InMemoryCache, HttpLink } from 'apollo-boost';
-import { onError } from 'apollo-link-error';
-import { AlertError } from '../components/Alert';
+import { ApolloClient, ApolloLink, InMemoryCache } from 'apollo-boost'
+import { onError } from 'apollo-link-error'
+import { createUploadLink } from 'apollo-upload-client'
+import { AlertError } from '../components/Alert'
 
-const httpLink = new HttpLink({ uri: process.env.REACT_APP_SERVER_URL });
+const httpLink = new createUploadLink({ uri: process.env.REACT_APP_SERVER_URL });
 
 const authLink = new ApolloLink((operation, forward) => {
   // Retrieve the authorization token from local storage.

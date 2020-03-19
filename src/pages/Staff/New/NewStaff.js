@@ -9,6 +9,9 @@ import { useLazyFetcher } from '../../../utils/useFetcher'
 import { CREATE_STAFF } from '../../../api/staff'
 import { GET_USER_BY_FILTER } from '../../../api/user'
 import { AlertSuccess } from '../../../components/Alert'
+import Upload from '../../../components/Upload/Upload'
+import { CloudUpload, Delete } from '@material-ui/icons/';
+import { UPLOAD_FILE, DELETE_FILE } from '../../../api/upload'
 
 const useStyles = makeStyles(theme => ({
   pictureGrid: {
@@ -17,15 +20,15 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center'
   },
   profilePicture: {
-    width: '100%',
-    height: '100%'
+    width: '10em',
+    height: '10em'
   }
 }))
 
 const NewStaff = props => {
 
   const classes = useStyles()
-  const { register, handleSubmit, errors, getValues, setValue, reset } = useForm()
+  const { register, handleSubmit, errors, getValues, setValue, reset, control } = useForm()
   const [ picturePath, setPicturePath ] = React.useState('')
 
   const onSubmit = data => {
@@ -37,14 +40,11 @@ const NewStaff = props => {
     props.history.push('/staff')
   }
 
-  const uploadPicture = () => {
-    setPicturePath('test')
+  const uploadPicture = file => {
+    upload(file)
+    setPicturePath(URL.createObjectURL(file.file))
   }
   
-  const deletePicture = () => {
-    setPicturePath('')
-  }
-
   const generateUsername = () => {
     const staff = getValues()
     if (staff['staff.firstname'] && staff['staff.lastname']) {
@@ -53,6 +53,22 @@ const NewStaff = props => {
       checkUsername({ filter: { username }})
     }
   }
+
+  const deletePicture = () => {
+    deleteFile({ path: picturePath })
+  }
+
+  const [ deleteFile ] = useLazyFetcher( DELETE_FILE, { onComplete: (res) => { 
+    setValue('staff.picture', null)
+    setPicturePath(null)
+    AlertSuccess('Picture deleted successfully!')
+  }})
+
+  const [ upload ] = useLazyFetcher( UPLOAD_FILE, { onComplete: (res) => { 
+    setValue('staff.picture', res)
+    setPicturePath(res)
+    AlertSuccess('Picture uploaded successfully!')
+  }})
 
   const [ save ] = useLazyFetcher( CREATE_STAFF, { onComplete: (res) => { 
     reset()
@@ -80,7 +96,7 @@ const NewStaff = props => {
     <div>
       <form onSubmit={ handleSubmit( onSubmit )}>
 
-        <ActionToolBar title={ 'Edit Staff' }>
+        <ActionToolBar title={ 'New Staff' }>
           <Button variant='contained' color='primary' type='submit'> Save </Button>
           <Button variant='outlined' color='primary' onClick={ goBack }> Back </Button>
         </ActionToolBar>
@@ -89,14 +105,10 @@ const NewStaff = props => {
           <Grid container spacing={ 6 } >
             <Grid item xs={ 12 } md={ 2 }>
               <Grid container spacing={ 2 } className={ classes.pictureGrid }>
+                <Avatar alt='Profile Picture' src={ picturePath } className={ classes.profilePicture } ></Avatar>
                 <Grid item xs={ 12 } >
-                  <Avatar alt='Profile Picture' src={ picturePath } className={ classes.profilePicture } ></Avatar>
-                </Grid>
-                <Grid item xs={ 12 } >
-                <Button variant='contained' color='primary' onClick={ uploadPicture }> Upload Picture </Button>
-                  <br/>
-                  <br/>
-                  <Button variant='outlined' color='primary' onClick={ deletePicture }> Delete Picture </Button>
+                  <Upload startIcon={ <CloudUpload /> } variant='contained' color='primary' onUpload={ uploadPicture } label='Upload' accept='image/*' />
+                  { picturePath ? <div><br /><Button startIcon={ <Delete /> } variant='outlined' color='primary' onClick={ deletePicture } > Delete </Button></div> : null }
                 </Grid>
               </Grid>
             </Grid>
@@ -116,28 +128,28 @@ const NewStaff = props => {
                   <InputText label='Last Name' name='staff.lastname' inputRef={ register({ required: true, maxLength: 50 })} errors={ errors } onBlur={ generateUsername } />
                 </Grid>
                 <Grid item xs={ 12 } md={ 4 }>
-                  <InputText label='Email' name='staff.email' inputRef={ register({ required: true, maxLength: 50 })} errors={ errors } />
+                  <InputText label='Email' name='staff.email' inputRef={ register({ required: true, maxLength: 50 })} errors={ errors } type='email' />
                 </Grid>
                 <Grid item xs={ 12 } md={ 2 }>
-                  <InputText label='ABN' name='staff.abn' inputRef={ register({ required: true, maxLength: 11 })} errors={ errors } />
+                  <InputText label='ABN' name='staff.abn' inputRef={ register({ required: true, maxLength: 11 })} mask={[/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/]} errors={ errors } control={ control } />
                 </Grid>
                 <Grid item xs={ 12 } md={ 2 }>
-                  <InputText label='TFN' name='staff.tfn' inputRef={ register({ required: true, maxLength: 9 })} errors={ errors } />
+                  <InputText label='TFN' name='staff.tfn' inputRef={ register({ required: true, maxLength: 9 })} mask={[/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/]} errors={ errors } control={ control } />
                 </Grid>
                 <Grid item xs={ 12 } md={ 2 }>
-                  <InputText label='Mobile Phone' name='staff.mobile' inputRef={ register({ required: true, maxLength: 10 })} errors={ errors } />
+                  <InputText label='Mobile Phone' name='staff.mobile' inputRef={ register({ required: true, maxLength: 10 })} mask={[/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/]} errors={ errors } control={ control } />
                 </Grid>
                 <Grid item xs={ 12 } md={ 2 }>
-                  <InputText label='Commercial Phone' name='staff.commercialPhone' inputRef={ register({ required: true, maxLength: 10 })} errors={ errors } />
+                  <InputText label='Commercial Phone' name='staff.commercialPhone' inputRef={ register({ required: true, maxLength: 10 })} mask={[/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/,/\d/]} errors={ errors } control={ control } />
                 </Grid>
                 <Grid item xs={ 12 } md={ 8 }>
-                  <InputText label='Address' name='staff.address' inputRef={ register({ required: true, maxLength: 255 })} errors={ errors } />
+                  <InputText label='Address' name='staff.address' inputRef={ register({ required: true, maxLength: 255 })} errors={ errors } control={ control } />
                 </Grid>
                 <Grid item xs={ 12 } md={ 2 }>
-                  <InputText label='Postcode' name='staff.postcode' inputRef={ register({ required: true, maxLength: 4 })} errors={ errors } />
+                  <InputText label='Postcode' name='staff.postcode' inputRef={ register({ required: true, maxLength: 4 })} mask={[/\d/,/\d/,/\d/,/\d/]} errors={ errors } control={ control } />
                 </Grid>
                 <Grid item xs={ 12 } md={ 2 }>
-                  <InputText label='State' name='staff.state' inputRef={ register({ required: true, maxLength: 3 })} errors={ errors } />
+                  <InputText label='State' name='staff.state' inputRef={ register({ required: true, maxLength: 3 })} mask={[/[A-Z]/,/[A-Z]/,/[A-Z]/]} errors={ errors } control={ control } />
                 </Grid>
               </Grid>
             </Grid>
