@@ -9,7 +9,7 @@ import { useContext, useState, useEffect } from 'react';
  * @param { void } onComplete - Receives a method that is executed to manage the data
  * @param { void } onError - Receives a method that is executed in case of error
  */
-export const useFetcher = (query: DocumentNode, { filter, onComplete, onError }) => {
+export const useFetcher = (query, { filter, onComplete, onError }) => {
 
   const { actions } = useContext( AppContext )
   const [ state ] = useState({ variables: { ...filter }, onComplete, onError })
@@ -20,7 +20,7 @@ export const useFetcher = (query: DocumentNode, { filter, onComplete, onError })
     const fetchData = () => {
       actions.setUseLoader( true )
       setLoading( true )
-      client.query({query: query, variables: state.variables })
+      client.query({ query: query, variables: state.variables })
         .then(res => {
           const result = Object.keys(res.data).map(key => res.data[key])[0]
           setData(result)
@@ -39,7 +39,7 @@ export const useFetcher = (query: DocumentNode, { filter, onComplete, onError })
 
   }, [ actions, query, state ])
 
-  return { loading, data };
+  return { loading, data }
 }
 
 /**
@@ -48,7 +48,7 @@ export const useFetcher = (query: DocumentNode, { filter, onComplete, onError })
  * @param { Function } onComplete - Receives a method that is executed to manage the data
  * @param { Function } onError - Receives a method that is executed in case of error
  */
-export const useLazyFetcher = (query: DocumentNode, { onComplete, onError } = () => {} ) => {
+export const useLazyFetcher = (query, { onComplete, onError } = () => {} ) => {
 
   const { actions } = useContext( AppContext )
   const [ state ] = useState({ onComplete, onError })
@@ -75,26 +75,5 @@ export const useLazyFetcher = (query: DocumentNode, { onComplete, onError } = ()
       })
   }
 
-  return [ fetchData, { data, loading } ];
+  return [ fetchData, { data, loading } ]
 }
-
-// export const useLazyFetcher = (query, filter) => {
-
-//   const { actions } = useContext( AppContext )
-//   const [ state, setState ] = useState({ variables: { ...filter } })
-//   const [ data, setData ] = useState([])
-
-//   const fetchData = () => {
-//     actions.setUseLoader( true )
-//     client.query({query: query, variables: state.variables })
-//       .then(res => {
-//         Object.keys(res.data).filter(key => setData(res.data[key]))
-//       })
-//       .catch(err => console.log(err))
-//       .finally(() => {
-//         actions.setUseLoader( false )
-//       })
-//   }
-
-//   return [ fetchData, { data } ];
-// }

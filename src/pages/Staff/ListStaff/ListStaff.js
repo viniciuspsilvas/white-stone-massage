@@ -3,11 +3,18 @@ import MUIDataTable from 'mui-datatables';
 import { formatDateTime } from '../../../utils';
 import { GET_ALL } from '../../../api/staff';
 import { useFetcher } from '../../../utils/useFetcher'
+import { Avatar } from '@material-ui/core';
 
 const TABLE_COLUMNS = [
   {
     label: 'Code',
     name: 'id'
+  }, {
+    label: 'Picture',
+    name: 'picture',
+    options: {
+      customBodyRender: value => <Avatar alt='Profile Picture' src={ value } />
+    }
   }, {
     label: 'First Name',
     name: 'firstname'

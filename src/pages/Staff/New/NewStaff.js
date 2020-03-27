@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import ActionToolBar from '@bit/smart-solution-4u.components.action-tool-bar'
 import InputText from '@bit/smart-solution-4u.components.text-input'
 import Container from '@bit/smart-solution-4u.components.container'
-import { Button, Grid, Avatar, makeStyles } from '@material-ui/core'
+import { Button, Grid, Avatar, makeStyles, MenuItem } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import { useLazyFetcher } from '../../../utils/useFetcher'
 import { CREATE_STAFF } from '../../../api/staff'
@@ -11,7 +11,8 @@ import { GET_USER_BY_FILTER } from '../../../api/user'
 import { AlertSuccess } from '../../../components/Alert'
 import Upload from '../../../components/Upload/Upload'
 import { CloudUpload, Delete } from '@material-ui/icons/';
-import { UPLOAD_FILE, DELETE_FILE } from '../../../api/upload'
+import Select from '@bit/smart-solution-4u.components.select'
+import { australianStates } from '../../../utils'
 
 const useStyles = makeStyles(theme => ({
   pictureGrid: {
@@ -33,6 +34,7 @@ const NewStaff = props => {
 
   const onSubmit = data => {
     data.staff.id = null
+    data.staff.pictureFile = data.staff.pictureFile && data.staff.pictureFile.length > 0 ? data.staff.pictureFile[0] : null
     save(data)
   }
 
@@ -41,8 +43,7 @@ const NewStaff = props => {
   }
 
   const uploadPicture = file => {
-    upload(file)
-    setPicturePath(URL.createObjectURL(file.file))
+    setPicturePath(URL.createObjectURL(file))
   }
   
   const generateUsername = () => {
@@ -55,25 +56,14 @@ const NewStaff = props => {
   }
 
   const deletePicture = () => {
-    deleteFile({ path: picturePath })
+    setPicturePath('')
   }
 
-  const [ deleteFile ] = useLazyFetcher( DELETE_FILE, { onComplete: (res) => { 
-    setValue('staff.picture', null)
-    setPicturePath(null)
-    AlertSuccess('Picture deleted successfully!')
-  }})
-
-  const [ upload ] = useLazyFetcher( UPLOAD_FILE, { onComplete: (res) => { 
-    setValue('staff.picture', res)
-    setPicturePath(res)
-    AlertSuccess('Picture uploaded successfully!')
-  }})
-
   const [ save ] = useLazyFetcher( CREATE_STAFF, { onComplete: (res) => { 
-    reset()
+    deletePicture()
     AlertSuccess('Staff created successfully!')
-   }})
+    // reset()
+  }})
 
   const [ checkUsername ] = useLazyFetcher( GET_USER_BY_FILTER, { onComplete: res => {
     
@@ -105,9 +95,9 @@ const NewStaff = props => {
           <Grid container spacing={ 6 } >
             <Grid item xs={ 12 } md={ 2 }>
               <Grid container spacing={ 2 } className={ classes.pictureGrid }>
-                <Avatar alt='Profile Picture' src={ picturePath } className={ classes.profilePicture } ></Avatar>
+                <Avatar alt='Profile Picture' src={ picturePath } className={ classes.profilePicture } />
                 <Grid item xs={ 12 } >
-                  <Upload startIcon={ <CloudUpload /> } variant='contained' color='primary' onUpload={ uploadPicture } label='Upload' accept='image/*' />
+                  <Upload startIcon={ <CloudUpload /> } variant='contained' color='primary' name='staff.pictureFile' inputRef={ register() } onUpload={ uploadPicture } label='Upload' accept='image/*' />
                   { picturePath ? <div><br /><Button startIcon={ <Delete /> } variant='outlined' color='primary' onClick={ deletePicture } > Delete </Button></div> : null }
                 </Grid>
               </Grid>
@@ -149,7 +139,11 @@ const NewStaff = props => {
                   <InputText label='Postcode' name='staff.postcode' inputRef={ register({ required: true, maxLength: 4 })} mask={[/\d/,/\d/,/\d/,/\d/]} errors={ errors } control={ control } />
                 </Grid>
                 <Grid item xs={ 12 } md={ 2 }>
-                  <InputText label='State' name='staff.state' inputRef={ register({ required: true, maxLength: 3 })} mask={[/[A-Z]/,/[A-Z]/,/[A-Z]/]} errors={ errors } control={ control } />
+                  <Select label='State' name='staff.state' required errors={ errors } control={ control } >
+                    { australianStates.map(state => (
+                      <MenuItem value={ state.abbr }>{ state.name }</MenuItem>
+                    ))}
+                  </Select>
                 </Grid>
               </Grid>
             </Grid>

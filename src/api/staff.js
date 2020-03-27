@@ -54,3 +54,15 @@ export const CREATE_STAFF = gql`
     createStaff(staff: $staff)
   }
 `;
+
+export const DELETE_PICTURE = gql`
+  mutation deletePicture($staff: StaffInput!) {
+    deletePicture(staff: $staff)
+  }
+`;
+
+export const UPLOAD_PICTURE = gql`
+  mutation uploadPicture($staff: StaffInput!) {
+    uploadPicture(staff: $staff)
+  }
+`;

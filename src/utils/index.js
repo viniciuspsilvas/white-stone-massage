@@ -38,3 +38,12 @@ export const setFormValue = ( obj, setValue ) => {
     setValue(key, obj[key])
   })
 }
+
+export const australianStates = [
+  { name: 'New South Wales', abbr: 'NSW' },
+  { name: 'Queensland', abbr: 'QLD' },
+  { name: 'South Australia', abbr: 'SA' },
+  { name: 'Tasmania', abbr: 'TAS' },
+  { name: 'Victoria', abbr: 'VIC' },
+  { name: 'Western Australia', abbr: 'WA' }
+]

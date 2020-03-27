@@ -48,7 +48,9 @@ const errorLink = ApolloLink.from([
 
 const client = new ApolloClient({
   link: authLink.concat(errorLink).concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    addTypename: false
+  })
 });
 
 export default client
